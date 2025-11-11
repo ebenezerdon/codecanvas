@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeCanvas • Code to PNG</title>
+  <meta name="description" content="Turn code into beautiful PNG images with syntax highlighting and custom themes.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24' fill='none' stroke='%230b1220' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 18l6-6-6-6'/%3E%3Cpath d='M8 6l-6 6 6 6'/%3E%3C/svg%3E">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="styles/main.css">
+  <style type="text/tailwindcss" data-teda="tailwind-apply">
+    @layer components {
+      .btn-primary { @apply inline-flex items-center justify-center whitespace-nowrap bg-amber-500 text-slate-900 font-semibold px-4 py-2 rounded-lg shadow-sm hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-300 active:translate-y-[1px] transition; }
+      .btn-secondary { @apply inline-flex items-center justify-center whitespace-nowrap bg-white/90 border border-slate-200 text-slate-800 px-4 py-2 rounded-lg hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-200 transition; }
+      .chip { @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-sm text-slate-700 shadow-sm; }
+      .badge { @apply inline-block rounded-md bg-sky-100 text-sky-800 text-xs font-medium px-2 py-0.5; }
+      .nav-link { @apply text-slate-600 hover:text-slate-900 transition; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 selection:bg-amber-200 selection:text-slate-900">
+  <header class="sticky top-0 z-40 backdrop-blur bg-slate-50/80 border-b border-slate-200/70">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2" aria-label="CodeCanvas Home">
+        <div class="w-8 h-8 rounded-lg bg-slate-900 text-amber-400 grid place-items-center font-black">C</div>
+        <span class="font-semibold tracking-tight">CodeCanvas</span>
+      </a>
+      <nav class="hidden sm:flex items-center gap-6">
+        <a class="nav-link" href="#features">Features</a>
+        <a class="nav-link" href="#themes">Themes</a>
+        <a class="nav-link" href="#quality">Quality</a>
+      </nav>
+      <a href="app.html" class="btn-primary">Launch the editor</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO: vertical storytelling layout -->
+    <section class="relative min-h-[94vh] flex flex-col items-start justify-center overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-amber-100/60 blur-2xl"></div>
+        <div class="absolute -bottom-32 -left-20 w-80 h-80 rounded-full bg-sky-100/60 blur-2xl"></div>
+      </div>
+      <div class="max-w-6xl mx-auto px-4 w-full">
+        <p class="badge mb-6">Beautiful by default</p>
+        <h1 class="text-[clamp(2.25rem,7vw,5rem)] leading-[1.05] font-extrabold tracking-tight">
+          Turn code into
+          <span class="text-amber-500">artful</span> PNGs
+        </h1>
+        <p class="mt-4 max-w-xl text-slate-600 text-lg">
+          Paste or write code, pick a syntax theme and background, then export a crisp PNG ready for slides, docs, or social. No setup, no fuss.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a href="app.html" class="btn-primary">Start creating</a>
+          <a href="#features" class="btn-secondary">See how it works</a>
+        </div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-4 mt-16 w-full">
+        <div class="relative rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+          <div class="flex items-center gap-2 px-4 py-2 border-b border-slate-200 bg-slate-50">
+            <span class="sr-only">Window controls</span>
+            <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+            <span class="ml-2 text-xs text-slate-500">preview.png</span>
+          </div>
+          <pre class="p-6 text-[13px] leading-6 overflow-x-auto text-slate-800"><code>// Your code becomes a shareable image
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet("world"));</code></pre>
+        </div>
+        <div class="mt-6 flex items-center gap-4 text-sm text-slate-600">
+          <span class="chip"><span class="w-2 h-2 bg-amber-400 rounded-full"></span> PNG export up to 3x</span>
+          <span class="chip"><span class="w-2 h-2 bg-sky-400 rounded-full"></span> 20+ languages</span>
+          <span class="chip"><span class="w-2 h-2 bg-slate-400 rounded-full"></span> Local save</span>
+        </div>
+      </div>
+      <a href="#features" class="mx-auto mt-14 mb-6 text-slate-500 hover:text-slate-800 transition" aria-label="Scroll to features">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </section>
+
+    <!-- FEATURES: organic, asymmetrical blocks -->
+    <section id="features" class="py-20">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Crafted for clarity and style</h2>
+        <div class="mt-12 space-y-12">
+          <article class="flex flex-col sm:flex-row gap-8 sm:items-center">
+            <div class="sm:w-[70%] order-2 sm:order-1">
+              <div class="rounded-xl border border-slate-200 bg-white shadow-sm p-6">
+                <h3 class="font-semibold text-xl">Syntax highlighting that pops</h3>
+                <p class="mt-2 text-slate-600">Choose from popular highlight themes or go minimal. Your code stays legible and gorgeous.</p>
+              </div>
+            </div>
+            <div class="sm:w-[30%] order-1 sm:order-2">
+              <div class="rounded-xl border border-slate-200 bg-slate-900 text-amber-50 shadow-md p-4">
+                <pre class="text-[12px] leading-6 overflow-x-auto"><code>const add = (a,b) => a + b;
+export default add;</code></pre>
+              </div>
+            </div>
+          </article>
+
+          <article class="flex flex-col sm:flex-row gap-8 sm:items-stretch">
+            <div class="sm:w-[35%]">
+              <div class="rounded-xl border border-slate-200 bg-white shadow-sm p-6 h-full">
+                <h3 class="font-semibold text-xl">Custom backgrounds</h3>
+                <p class="mt-2 text-slate-600">Pick a solid color, toggle window chrome, add soft shadows, and control padding for perfect framing.</p>
+              </div>
+            </div>
+            <div class="sm:w-[65%]">
+              <div class="rounded-xl border border-slate-200 bg-white shadow-sm p-2">
+                <div class="rounded-lg bg-[#0b1220] p-6 text-slate-200">
+                  <pre class="text-[12px] leading-6 overflow-x-auto"><code>print("High contrast looks great on dark backgrounds")</code></pre>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article id="quality" class="flex flex-col sm:flex-row gap-8 sm:items-center">
+            <div class="sm:w-[70%]">
+              <div class="rounded-xl border border-slate-200 bg-white shadow-sm p-6">
+                <h3 class="font-semibold text-xl">High quality PNG export</h3>
+                <p class="mt-2 text-slate-600">Export up to 3x pixel ratio for crisp slides and Retina screens. Everything happens in your browser.</p>
+              </div>
+            </div>
+            <div class="sm:w-[30%]">
+              <div class="rounded-xl border border-slate-200 bg-white shadow-sm p-6 text-sm text-slate-600">
+                <ul class="list-disc ml-5 space-y-1">
+                  <li>Local storage remembers your setup</li>
+                  <li>Keyboard friendly controls</li>
+                  <li>Accessible colors and contrast</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="mt-14">
+          <a href="app.html" class="btn-primary">Open the editor</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 py-10 text-sm text-slate-600">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <p>&copy; <span id="year"></span> CodeCanvas. Built for makers who love readable code.</p>
+      <div class="flex items-center gap-4">
+        <a class="nav-link" href="app.html">Editor</a>
+        <a class="nav-link" href="#features">Features</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    $(function(){ $('#year').text(new Date().getFullYear()); });
+  </script>
+  <script src="scripts/helpers.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

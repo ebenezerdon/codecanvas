@@ -1,0 +1,52 @@
+/* Global styles for CodeCanvas */
+:root {
+  --brand-dark: #0b1220;
+  --brand-ink: #0f172a;
+}
+
+html:focus-within { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+/* Preview styles */
+#exportCanvas {
+  /* Rounded corners and shadow toggle handled by JS with utility classes */
+  display: inline-block;
+}
+
+#codeWrapper {
+  padding: 24px; /* default, updated by JS */
+}
+
+#codeWrapper pre, #codeWrapper code, #codeBlock {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+/* highlight.js line numbers plugin styling */
+/* Ensure good contrast and spacing */
+.hljs-ln-numbers {
+  -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
+  text-align: right;
+  color: rgba(148,163,184,0.9);
+  border-right: 1px solid rgba(148,163,184,0.25);
+  vertical-align: top;
+  padding-right: 12px !important;
+}
+.hljs-ln-code { padding-left: 12px !important; }
+.hljs { line-height: 1.6; }
+
+/* Switch accessibility states */
+button[role="switch"][aria-checked="true"] { background-color: #0ea5e9; }
+button[role="switch"][aria-checked="true"] .switch-dot { transform: translateX(22px); }
+button[role="switch"][aria-checked="false"] .switch-dot { transform: translateX(2px); }
+
+/* Prevent buttons from wrapping text on small screens */
+.btn-primary, .btn-secondary { white-space: nowrap; }
+
+/* Responsive scroll container for preview */
+#previewScroller { padding-bottom: 8px; }
+
+/* Utility: visually hidden but screen reader accessible */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 1px, 1px); border: 0; }
