@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeCanvas Editor • Code to PNG</title>
+  <meta name="description" content="Write or paste code, highlight it beautifully, and export as high-quality PNG.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- Highlight.js theme (dynamic) -->
+  <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <!-- Highlight.js core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <!-- Highlight.js languages (common) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/c.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/rust.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/ruby.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/swift.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/kotlin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/shell.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/markdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/html.min.js"></script>
+  <!-- Line numbers plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
+  <!-- html-to-image for PNG export -->
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js" data-lib="html-to-image"></script>
+  <style type="text/tailwindcss" data-teda="tailwind-apply">
+    @layer components {
+      .btn-primary { @apply inline-flex items-center justify-center whitespace-nowrap bg-amber-500 text-slate-900 font-semibold px-4 py-2 rounded-lg shadow-sm hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-300 active:translate-y-[1px] transition; }
+      .btn-secondary { @apply inline-flex items-center justify-center whitespace-nowrap bg-white/90 border border-slate-200 text-slate-800 px-4 py-2 rounded-lg hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-200 transition; }
+      .switch { @apply relative inline-flex h-6 w-11 items-center rounded-full bg-slate-200 transition; }
+      .switch-dot { @apply inline-block h-4 w-4 transform rounded-full bg-white transition; }
+      .field-label { @apply block text-sm font-medium text-slate-700 mb-1; }
+      .input { @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-200; }
+      .select { @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-200; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 selection:bg-amber-200 selection:text-slate-900">
+  <header class="sticky top-0 z-40 backdrop-blur bg-slate-50/80 border-b border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2" aria-label="Back to landing">
+        <div class="w-8 h-8 rounded-lg bg-slate-900 text-amber-400 grid place-items-center font-black">C</div>
+        <span class="font-semibold tracking-tight">CodeCanvas</span>
+      </a>
+      <div class="flex items-center gap-2 text-sm text-slate-600">
+        <span class="hidden sm:inline">Turn code into PNG</span>
+        <a href="index.html" class="btn-secondary">Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-6">
+    <div class="grid lg:grid-cols-[320px,1fr] gap-6">
+      <!-- Controls Panel -->
+      <aside class="bg-white/90 border border-slate-200 rounded-2xl shadow-sm p-4 lg:sticky lg:top-24 h-max">
+        <h2 class="text-lg font-semibold">Controls</h2>
+        <div class="mt-4 space-y-5">
+          <div>
+            <label for="language" class="field-label">Language</label>
+            <select id="language" class="select" aria-label="Select language">
+              <option value="auto">Auto detect</option>
+            </select>
+          </div>
+          <div>
+            <label for="theme" class="field-label">Syntax theme</label>
+            <select id="theme" class="select" aria-label="Select syntax theme"></select>
+          </div>
+          <div>
+            <label for="bgColor" class="field-label">Background</label>
+            <div class="flex items-center gap-2">
+              <input id="bgColor" type="color" value="#0b1220" class="h-9 w-16 rounded cursor-pointer border border-slate-200 p-1" aria-label="Pick background color" />
+              <div class="flex items-center gap-2" id="bgSwatches" aria-label="Preset colors">
+                <button class="w-7 h-7 rounded-md border border-slate-200" data-color="#0b1220" style="background:#0b1220" aria-label="Midnight"></button>
+                <button class="w-7 h-7 rounded-md border border-slate-200" data-color="#0f172a" style="background:#0f172a" aria-label="Slate"></button>
+                <button class="w-7 h-7 rounded-md border border-slate-200" data-color="#111827" style="background:#111827" aria-label="Charcoal"></button>
+                <button class="w-7 h-7 rounded-md border border-slate-200" data-color="#ffffff" style="background:#ffffff" aria-label="White"></button>
+                <button class="w-7 h-7 rounded-md border border-slate-200" data-color="#f8fafc" style="background:#f8fafc" aria-label="Paper"></button>
+                <button class="w-7 h-7 rounded-md border border-slate-200" data-color="#0e7490" style="background:#0e7490" aria-label="Ocean"></button>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="padding" class="field-label">Padding</label>
+              <input id="padding" type="range" min="8" max="64" step="2" class="w-full" value="24" aria-label="Padding" />
+            </div>
+            <div>
+              <label for="fontSize" class="field-label">Font size</label>
+              <select id="fontSize" class="select" aria-label="Font size">
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14" selected>14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="flex items-center justify-between gap-3">
+              <span class="text-sm">Line numbers</span>
+              <button id="toggleLineNumbers" class="switch" role="switch" aria-checked="true"><span class="switch-dot translate-x-1"></span></button>
+            </label>
+            <label class="flex items-center justify-between gap-3">
+              <span class="text-sm">Wrap lines</span>
+              <button id="toggleWrap" class="switch" role="switch" aria-checked="false"><span class="switch-dot translate-x-1"></span></button>
+            </label>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="flex items-center justify-between gap-3">
+              <span class="text-sm">Window chrome</span>
+              <button id="toggleChrome" class="switch" role="switch" aria-checked="true"><span class="switch-dot translate-x-1"></span></button>
+            </label>
+            <label class="flex items-center justify-between gap-3">
+              <span class="text-sm">Soft shadow</span>
+              <button id="toggleShadow" class="switch" role="switch" aria-checked="true"><span class="switch-dot translate-x-1"></span></button>
+            </label>
+          </div>
+          <div class="grid grid-cols-2 gap-3 items-end">
+            <div>
+              <label for="pixelRatio" class="field-label">Export scale</label>
+              <select id="pixelRatio" class="select" aria-label="Export scale">
+                <option value="1">1x</option>
+                <option value="2" selected>2x</option>
+                <option value="3">3x</option>
+              </select>
+            </div>
+            <div class="flex items-center gap-2 justify-end">
+              <button id="copyBtn" class="btn-secondary">Copy PNG</button>
+              <button id="exportBtn" class="btn-primary">Export PNG</button>
+            </div>
+          </div>
+          <p id="status" class="text-xs text-slate-500 h-5" aria-live="polite"></p>
+        </div>
+      </aside>
+
+      <!-- Editor and Preview -->
+      <section class="space-y-4">
+        <div class="bg-white/90 border border-slate-200 rounded-2xl shadow-sm p-4">
+          <label for="codeInput" class="field-label">Your code</label>
+          <textarea id="codeInput" class="input min-h-[180px] font-mono" spellcheck="false" placeholder="Paste or write code here..."></textarea>
+          <div class="mt-2 flex items-center justify-between text-xs text-slate-500">
+            <span id="charCount">0 characters</span>
+            <div class="flex items-center gap-2">
+              <button id="clearBtn" class="btn-secondary">Clear</button>
+              <button id="sampleBtn" class="btn-secondary">Load sample</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/90 border border-slate-200 rounded-2xl shadow-sm p-4">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-semibold">Preview</h3>
+            <span class="text-xs text-slate-500">PNG export will match this preview</span>
+          </div>
+          <div class="w-full overflow-auto" id="previewScroller">
+            <div id="exportCanvas" class="rounded-xl" style="background:#0b1220">
+              <div id="chromeBar" class="flex items-center gap-2 px-4 py-2 border-b border-white/5 bg-white/5 text-white/60 text-xs hidden">
+                <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                <span class="ml-2">code.png</span>
+              </div>
+              <pre id="codeWrapper" class="m-0"><code id="codeBlock" class="hljs"></code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Scripts: exact order per contract -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="scripts/helpers.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>
